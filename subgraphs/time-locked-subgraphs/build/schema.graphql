@@ -1,0 +1,39 @@
+type AggregateVault @entity {
+  id: String!
+  totalDeposit: BigInt!
+  totalTarget: BigInt!
+  totalWithdrawn: BigInt!
+}
+
+type Vault @entity {
+  id: String!
+  depositAmount: BigInt!
+  targetAmount: BigInt!
+  lockStartTime: BigInt!
+  lockEndTime: BigInt!
+  purpose: String!
+  withdrawn: Boolean!
+  owner: Owner!
+}
+
+type Owner @entity {
+  id: String!
+  totalDeposit: BigInt!
+  totalTarget: BigInt!
+  totalWithdrawn: BigInt!
+}
+
+type OwnerAction @entity {
+  id: String!
+  owner: Owner!
+  action: ActionType!
+  actor: String!
+  vault: Vault!
+  amount: BigInt!
+}
+
+enum ActionType {
+  Create
+  Deposit
+  Withdraw
+}
